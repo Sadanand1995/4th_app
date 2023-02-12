@@ -15,6 +15,9 @@ const Cart = () => {
       type: "addToCart",
       payload: { id },
     });
+    dispatch({
+      type: "calculatePrice",
+    });
   };
 
   const decrement = (id) => {
@@ -22,12 +25,18 @@ const Cart = () => {
       type: "decrement",
       payload: id,
     });
+    dispatch({
+      type: "calculatePrice",
+    });
   };
 
   const deleteHandler = (id) => {
     dispatch({
       type: "deleteHandler",
       payload: id,
+    });
+    dispatch({
+      type: "calculatePrice",
     });
   };
 

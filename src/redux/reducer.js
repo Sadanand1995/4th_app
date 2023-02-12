@@ -31,6 +31,15 @@ export const cartReducer = createReducer(
       }
     },
 
-    deleteHandler: (state, action) => {},
+    deleteHandler: (state, action) => {
+      state.cartItems = state.cartItems.filter((i) => i.id !== action.payload);
+    },
+
+    calculatePrice: (state) => {
+      state.cartItems.forEach((i) => (state.subTotal += i.price * i.quantity));
+      state.shipping = state.subTotal > 1000 || state.subTotal === 0 ? 0 : 50;
+      state.tax = +(state.subTotal * 0.18).toFixed();
+      state.total = state.subTotal + state.shipping + state.tax;
+    },
   }
 );
