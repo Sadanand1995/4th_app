@@ -36,7 +36,9 @@ export const cartReducer = createReducer(
     },
 
     calculatePrice: (state) => {
-      state.cartItems.forEach((i) => (state.subTotal += i.price * i.quantity));
+      let sum = 0;
+      state.cartItems.forEach((i) => (sum += i.price * i.quantity));
+      state.subTotal = sum;
       state.shipping = state.subTotal > 1000 || state.subTotal === 0 ? 0 : 50;
       state.tax = +(state.subTotal * 0.18).toFixed();
       state.total = state.subTotal + state.shipping + state.tax;
